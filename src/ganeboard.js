@@ -1,8 +1,7 @@
 import { Ship } from './ship'
 
 export class Gameboard {
-    occupiedPositions = new Map()
-    attackedPositions = new Map()
+    boardPositions = new Map()
     constructor() {
         this.size = 10
     }
@@ -18,14 +17,14 @@ export class Gameboard {
             this.#checkBounds(posX, posY)
             const key = `${posX}, ${posY}`
             // If there's a ship on the path, return false
-            if (this.occupiedPositions.has(key)) {
+            if (this.boardPositions.has(key)) {
                 return false
             }
             positions.push(key)
         }
         // Set the positions the ship occupies
         positions.forEach((position) => {
-            this.occupiedPositions.set(position, ship)
+            this.#addCoordinatesData(position, ship)
         })
         return true
     }
@@ -33,17 +32,27 @@ export class Gameboard {
     receiveAttack(x, y) {
         this.#checkBounds(x, y)
         const key = `${x}, ${y}`
-        if (this.occupiedPositions.has(key)) {
-            const ship = this.occupiedPositions.get(key)
-            ship.hit()
-            this.attackedPositions.set(key, 'hit')
-            return true
+        if (this.boardPositions.has(key)) {
+            const entry = this.boardPositions.get(key)
+            if (entry.event !== null) {
+                throw new Error('You have already attacked here.')
+            }
+            if (entry.object !== null) {
+                entry.object.hit()
+                entry.event = 'hit'
+                return true
+            }
         }
-        this.attackedPositions.set(key, 'miss')
+        this.#addCoordinatesData(key, null, 'miss')
         return false
     }
+    // Helper function to check boundary
     #checkBounds(x, y) {
         if (x >= this.size || y >= this.size)
             throw new Error('Unable to place out of board bounds')
+    }
+    // Helper method to set coordinate data for ships/attacks
+    #addCoordinatesData(key, obj = null, event = null) {
+        this.boardPositions.set(key, { object: obj, event: event })
     }
 }

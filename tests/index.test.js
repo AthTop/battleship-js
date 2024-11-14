@@ -73,4 +73,10 @@ describe('Gameboard tests', () => {
             gameboard.receiveAttack(0, 11)
         }).toThrow(/bounds/)
     })
+    it('Gameboard checks if same spot has been attacked before', () => {
+        gameboard.receiveAttack(0,0)
+        expect(() => {
+            gameboard.receiveAttack(0,0)
+        }).toThrow(/attack/)
+    })
 })
