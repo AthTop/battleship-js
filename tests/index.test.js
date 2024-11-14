@@ -49,4 +49,12 @@ describe('Gameboard tests', () => {
         expect(gameboard.placeShip(3, 0, 1, 'vertical')).toBeTruthy()
         expect(gameboard.placeShip(3, 0, 3, 'vertical')).toBeFalsy()
     })
+    it('Gameboard checks if trying to place ship out of bounds', () => {
+        expect(() => {
+            gameboard.placeShip(3, 9, 0, 'horizontal')
+        }).toThrow(/bounds/)
+        expect(() => {
+            gameboard.placeShip(3, 1, 9, 'vertical')
+        }).toThrow(/bounds/)
+    })
 })
