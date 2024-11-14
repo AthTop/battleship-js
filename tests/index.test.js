@@ -57,4 +57,20 @@ describe('Gameboard tests', () => {
             gameboard.placeShip(3, 1, 9, 'vertical')
         }).toThrow(/bounds/)
     })
+    it('Gameboard handles attack that hits', () => {
+        gameboard.placeShip(3, 0, 0)
+        expect(gameboard.receiveAttack(1, 0)).toBeTruthy()
+    })
+    it('Gameboard handles attack that misses', () => {
+        gameboard.placeShip(3, 0, 0)
+        expect(gameboard.receiveAttack(5, 5)).toBeFalsy()
+    })
+    it('Gameboard checks if trying to attack out of bounds', () => {
+        expect(() => {
+            gameboard.receiveAttack(10, 0)
+        }).toThrow(/bounds/)
+        expect(() => {
+            gameboard.receiveAttack(0, 11)
+        }).toThrow(/bounds/)
+    })
 })
