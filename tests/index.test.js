@@ -36,4 +36,17 @@ describe('Gameboard tests', () => {
     it('Gameboard exists', () => {
         expect(gameboard).toBeDefined()
     })
+    it('Gameboard can place ships in it', () => {
+        expect(gameboard.placeShip(2, 0, 0)).toBeTruthy()
+    })
+    it('Gameboard checks for existing ship in position', () => {
+        expect(gameboard.placeShip(3, 0, 0)).toBeTruthy()
+        expect(gameboard.placeShip(3, 2, 0)).toBeFalsy()
+    })
+    it('Gameboard checks for ship orientation when placing', () => {
+        expect(gameboard.placeShip(3, 0, 0, 'horizontal')).toBeTruthy()
+        expect(gameboard.placeShip(3, 2, 0, 'horizontal')).toBeFalsy()
+        expect(gameboard.placeShip(3, 0, 1, 'vertical')).toBeTruthy()
+        expect(gameboard.placeShip(3, 0, 3, 'vertical')).toBeFalsy()
+    })
 })
