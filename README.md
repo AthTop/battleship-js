@@ -1,2 +1,2 @@
-# template-repo
-A template repo for webpack config
+# battleship-js
+A battleship game project inspired by The Odin Project, in JavaScript
