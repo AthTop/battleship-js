@@ -39,10 +39,10 @@ export class Gameboard {
             if (entry.event !== null) {
                 throw new Error('You have already attacked here.')
             }
-            if (entry.object !== null) {
-                entry.object.hit()
-                if (entry.object.isSunk()) {
-                    this.ships.delete(entry.object)
+            if (entry.ship !== null) {
+                entry.ship.hit()
+                if (entry.ship.isSunk()) {
+                    this.ships.delete(entry.ship)
                 }
                 entry.event = 'hit'
                 return true
@@ -62,6 +62,6 @@ export class Gameboard {
     }
     // Helper method to set coordinate data for ships/attacks
     #addCoordinatesData(key, obj = null, event = null) {
-        this.boardPositions.set(key, { object: obj, event: event })
+        this.boardPositions.set(key, { ship: obj, event: event })
     }
 }
