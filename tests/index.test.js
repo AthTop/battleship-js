@@ -2,6 +2,7 @@
 
 import { Ship } from '../src/ship'
 import { Gameboard } from '../src/ganeboard'
+import { Player } from '../src/player'
 
 describe('Ship Tests', () => {
     let ship
@@ -87,5 +88,25 @@ describe('Gameboard tests', () => {
     it('Gameboard reports ships not sunk', () => {
         gameboard.placeShip(1, 0, 0)
         expect(gameboard.areShipsSunk()).toBeFalsy()
+    })
+})
+
+describe('Player tests', () => {
+    let player
+    beforeEach(() => {
+        player = new Player('Name')
+    })
+    it('Player exists', () => {
+        expect(player).toBeDefined()
+    })
+    it('Player has gameboard', () => {
+        expect(player.gameboard).toBeDefined()
+    })
+    it('Player handles human players', () => {
+        expect(player.computer).toBeFalsy()
+    })
+    it('Player handles computer players', () => {
+        player = new Player('Name', false)
+        expect(player.computer).toBeTruthy()
     })
 })

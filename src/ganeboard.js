@@ -3,8 +3,8 @@ import { Ship } from './ship'
 export class Gameboard {
     boardPositions = new Map()
     ships = new Set()
-    constructor() {
-        this.size = 10
+    constructor(size) {
+        this.size = size || 10
     }
     // Places ship object on occupied positions based on orientation
     placeShip(shipSize, x, y, orientation = 'horizontal') {
