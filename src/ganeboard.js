@@ -2,12 +2,14 @@ import { Ship } from './ship'
 
 export class Gameboard {
     boardPositions = new Map()
+    ships = new Set()
     constructor() {
         this.size = 10
     }
     // Places ship object on occupied positions based on orientation
     placeShip(shipSize, x, y, orientation = 'horizontal') {
         const ship = new Ship(shipSize)
+        this.ships.add(ship)
         const positions = []
         // Get coords based on orientation
         for (let i = 0; i < shipSize; i++) {
@@ -39,11 +41,18 @@ export class Gameboard {
             }
             if (entry.object !== null) {
                 entry.object.hit()
+                if (entry.object.isSunk()) {
+                    this.ships.delete(entry.object)
+                }
                 entry.event = 'hit'
                 return true
             }
         }
         this.#addCoordinatesData(key, null, 'miss')
+        return false
+    }
+    areShipsSunk() {
+        if (this.ships.size === 0) return true
         return false
     }
     // Helper function to check boundary

@@ -74,9 +74,18 @@ describe('Gameboard tests', () => {
         }).toThrow(/bounds/)
     })
     it('Gameboard checks if same spot has been attacked before', () => {
-        gameboard.receiveAttack(0,0)
+        gameboard.receiveAttack(0, 0)
         expect(() => {
-            gameboard.receiveAttack(0,0)
+            gameboard.receiveAttack(0, 0)
         }).toThrow(/attack/)
+    })
+    it('Gameboard reports all ships sunk', () => {
+        gameboard.placeShip(1, 0, 0)
+        gameboard.receiveAttack(0, 0)
+        expect(gameboard.areShipsSunk()).toBeTruthy()
+    })
+    it('Gameboard reports ships not sunk', () => {
+        gameboard.placeShip(1, 0, 0)
+        expect(gameboard.areShipsSunk()).toBeFalsy()
     })
 })
