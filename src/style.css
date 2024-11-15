@@ -1,0 +1,49 @@
+.board-container {
+    display: grid;
+    gap: 01px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+}
+
+.grid-cell {
+    background-color: lightgray;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 40px;
+    width: 40px;
+}
+
+#players {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 100px;
+}
+
+.players {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.players div:first-child {
+    text-align: center;
+    font-size: 32px;
+}
+
+.ship {
+    background-color: blue;
+}
+
+.hit-spot::before {
+    content: "💥";
+
+}
+.missed-spot::before {
+    content: "❌";
+    font-size: 32px;
+    text-align: center;
+}
