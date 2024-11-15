@@ -2,6 +2,7 @@ import './style.css';
 
 import { Player } from './player'
 import { renderBoard } from './renderBoard'
+import { playerTurn } from './DomEventHandler';
 
 let player1 = new Player('Player 1')
 let player2 = new Player('Player 2')
@@ -17,6 +18,11 @@ player1.gameboard.placeShip(4, 0, 2, 'vertical')
 player2.gameboard.placeShip(5, 0, 0, 'vertical')
 player2.gameboard.placeShip(4, 2, 0)
 player1.gameboard.receiveAttack(0,0)
-player1.gameboard.receiveAttack(0, 1)
+player1.gameboard.receiveAttack(0,1)
+player2.gameboard.receiveAttack(0,0)
+player2.gameboard.receiveAttack(0,7)
 renderBoard(player1.gameboard, player1Board)
 renderBoard(player2.gameboard, player2Board)
+
+playerTurn(player2, player2Board)
+playerTurn(player1, player1Board)

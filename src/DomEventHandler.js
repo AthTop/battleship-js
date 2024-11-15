@@ -1,15 +1,27 @@
-import { Player } from './player'
 import { renderBoard } from './renderBoard'
-
-let player1 = new Player('Player 1')
-let player2 = new Player('Player 2')
-const player1Board = document.getElementById('board1')
-const player2Board = document.getElementById('board2')
-
-player1.gameboard.placeShip(5, 0, 0)
-player1.gameboard.placeShip(4, 0, 2, 'vertical')
-player2.gameboard.placeShip(5, 0, 0, 'vertical')
-player2.gameboard.placeShip(4, 2, 0)
-
-renderBoard(player1.board, player1Board)
-renderBoard(player2.board, player2Board)
+// Handles player's turn
+export const playerTurn = (enemyPlayer, enemyBoardElement) => {
+    // Use promise to only remove eventhandler after the player is done with their turn
+    const handleAttack = (e) => {
+        return new Promise((resolve) => {
+            if (e.target.classList.contains('grid-cell')) {
+                const [x, y] = e.target.dataset.coord.split(',').map(Number)
+                try {
+                    const attackResult = enemyPlayer.gameboard.receiveAttack(x, y)
+                    renderBoard(enemyPlayer.gameboard, enemyBoardElement)
+                    if (!attackResult) {
+                        resolve()
+                    }
+                } catch (error) {
+                    // TODO add a non-alert notification
+                    console.error('Error: Cant attack same spot twice')
+                }
+            }
+        })
+    }
+    const handleClick = async (e) => {
+        await handleAttack(e)
+        enemyBoardElement.removeEventListener('click', handleClick)
+    }
+    enemyBoardElement.addEventListener('click', handleClick)
+}
