@@ -33,7 +33,7 @@
     font-size: 32px;
 }
 
-.ship {
+#player1 .ship {
     background-color: blue;
 }
 
@@ -45,4 +45,8 @@
     content: "❌";
     font-size: 32px;
     text-align: center;
+}
+
+.hidden {
+    display: none;
 }

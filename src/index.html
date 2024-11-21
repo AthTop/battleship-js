@@ -1,22 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webpack Template</title>
-</head>
-<body>
-    <div id="app">
-        <div id="players">
-            <div id="player1" class="players">
-                <div id="player1-name"></div>
-                <div id="board1" class="board-container"></div>
-            </div>
-            <div id="player2" class="players">
-                <div id="player2-name"></div>
-                <div id="board2" class="board-container"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Webpack Template</title>
+    </head>
+    <body>
+        <div id="app">
+            <form action="">
+                <div>
+                    <h1>Player 1</h1>
+                    <label for="player1name">Name</label>
+                    <input type="text" id="player1name" name="player1name" required/>
+                    <label for="Human/Computer">Computer</label>
+                    <input type="checkbox" name="Human/Computer" id="computer-toggle"/>
+                </div>
+                <div>
+                    <dialog></dialog>
+                </div>
+                <div>
+                    <h1>Player 2</h1>
+                    <label for="player2name">Name</label>
+                    <input type="text" id="player2name" name="player2name" required/>
+                    <label for="Human/Computer">Computer</label>
+                    <input type="checkbox" name="Human/Computer" id="computer-toggle"/>
+                </div>
+                <div>
+                    <h3>Player 2 Ships</h3>
+                </div>
+                <button type="submit">Start Game</button>
+            </form>
+
+            <div id="players" class="hidden">
+                <div id="player1" class="players">
+                    <div id="player1-name"></div>
+                    <div id="board1" class="board-container"></div>
+                </div>
+                <div id="player2" class="players">
+                    <div id="player2-name"></div>
+                    <div id="board2" class="board-container"></div>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
