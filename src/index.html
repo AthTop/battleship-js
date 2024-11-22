@@ -7,30 +7,6 @@
     </head>
     <body>
         <div id="app">
-            <form action="">
-                <div>
-                    <h1>Player 1</h1>
-                    <label for="player1name">Name</label>
-                    <input type="text" id="player1name" name="player1name" required/>
-                    <label for="Human/Computer">Computer</label>
-                    <input type="checkbox" name="Human/Computer" id="computer-toggle"/>
-                </div>
-                <div>
-                    <dialog></dialog>
-                </div>
-                <div>
-                    <h1>Player 2</h1>
-                    <label for="player2name">Name</label>
-                    <input type="text" id="player2name" name="player2name" required/>
-                    <label for="Human/Computer">Computer</label>
-                    <input type="checkbox" name="Human/Computer" id="computer-toggle"/>
-                </div>
-                <div>
-                    <h3>Player 2 Ships</h3>
-                </div>
-                <button type="submit">Start Game</button>
-            </form>
-
             <div id="players" class="hidden">
                 <div id="player1" class="players">
                     <div id="player1-name"></div>
@@ -41,6 +17,51 @@
                     <div id="board2" class="board-container"></div>
                 </div>
             </div>
+            <form id="player-form" action="">
+                <div>
+                    <h1>Player 1</h1>
+                    <div class="checkbox-container">
+                        <label for="Human/Computer">Computer</label>
+                        <input
+                            type="checkbox"
+                            name="Human/Computer"
+                            class="computer-toggle"
+                        />
+                    </div>
+                    <div class="ship-container hidden">
+                        <label for="ship">Ship Size 1</label>
+                        <input type="text" name="ship-x" placeholder="X" class="ship-input" pattern="[1-9]|10" title="Please enter a number between 1 and 10" min="1" max="10" required>
+                        <input type="text" name="ship-y" placeholder="Y" class="ship-input" pattern="[1-9]|10" title="Please enter a number between 1 and 10" min="1" max="10" required>
+                        <select name="orientation">
+                            <option value="horizontal">Horizontal</option>
+                            <option value="vertical">Vertical</option>
+                        </select>
+                        <button type="button" class="add-ship-btn" id="add-ship-btn-1">Add Ship</button>
+                    </div>
+                </div>
+                <div>
+                    <h1>Player 2</h1>
+                    <div class="checkbox-container">
+                        <label for="Human/Computer">Computer</label>
+                        <input
+                            type="checkbox"
+                            name="Human/Computer"
+                            class="computer-toggle"
+                        />
+                    </div>
+                    <div class="ship-container hidden">
+                        <label for="ship">Ship Size 1</label>
+                        <input type="text" name="ship-x" placeholder="X" class="ship-input" pattern="[1-9]|10" title="Please enter a number between 1 and 10" min="1" max="10" required>
+                        <input type="text" name="ship-y" placeholder="Y" class="ship-input" pattern="[1-9]|10" title="Please enter a number between 1 and 10" min="1" max="10" required>
+                        <select name="orientation">
+                            <option value="horizontal" selected>Horizontal</option>
+                            <option value="vertical">Vertical</option>
+                        </select>
+                        <button type="button" class="add-ship-btn" id="add-ship-btn-2">Add Ship</button>
+                    </div>
+                </div>
+            </form>
+            <button type="submit" id="init-btn">Initiate Game</button>
         </div>
     </body>
 </html>

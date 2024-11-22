@@ -2,8 +2,7 @@ import { Gameboard } from './ganeboard'
 
 // Creates human players by default unless specified otherwise
 export class Player {
-    constructor(name, human = true, size) {
-        this.name = name
+    constructor(human = true, size) {
         this.computer = !human
         this.gameboard = new Gameboard(size)
         this.attackedCoords = new Map()

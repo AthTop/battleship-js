@@ -1,10 +1,10 @@
 export const renderBoard = (board, boardElement) => {
     const fragment = document.createDocumentFragment()
-    for (let i = 0; i < board.size; i++) {
-        for (let j = 0; j < board.size; j++) {
+    for (let row = 0; row < board.size; row++) {
+        for (let col = 0; col < board.size; col++) {
             const div = document.createElement('div')
             div.className = 'grid-cell'
-            div.dataset.coord = `${i}, ${j}`
+            div.dataset.coord = `${col}, ${row}`
             if (board.boardPositions.has(div.dataset.coord)) {
                 const entry = board.boardPositions.get(div.dataset.coord)
                 if (entry.ship !== null) {
