@@ -25,18 +25,21 @@ const handleAttack = (e, enemyPlayer, enemyBoardElement) => {
 export const playerTurn = async (
     currentPlayer,
     enemyPlayer,
-    enemyBoardElement, currentPlayerBoardElement
+    enemyBoardElement,
+    currentPlayerBoardElement
 ) => {
-    currentPlayerBoardElement.parentElement.classList.toggle('active')
-    enemyBoardElement.parentElement.classList.toggle('active')
     if (currentPlayer.computer) {
+        switchActiveBoard(enemyBoardElement, currentPlayerBoardElement)
         let continueTurn = currentPlayer.makeMove(enemyPlayer)
         renderBoard(enemyPlayer.gameboard, enemyBoardElement)
+        if (!continueTurn)
+            await new Promise((resolve) => setTimeout(resolve, 1000))
         while (continueTurn) {
-            await new Promise((resolve) => setTimeout(resolve, 500))
+            await new Promise((resolve) => setTimeout(resolve, 1000))
             continueTurn = currentPlayer.makeMove(enemyPlayer)
             renderBoard(enemyPlayer.gameboard, enemyBoardElement)
         }
+        switchActiveBoard(enemyBoardElement, currentPlayerBoardElement)
         return
     } else {
         return new Promise((resolve) => {
@@ -54,13 +57,18 @@ export const playerTurn = async (
     }
 }
 
+const switchActiveBoard = (board1, board2) => {
+    board1.parentElement.classList.toggle('active')
+    board2.parentElement.classList.toggle('active')
+}
+
 export const gameloop = async (
     player1,
     player2,
     player1Board,
     player2Board
 ) => {
-    player1Board.parentElement.classList.toggle('active')
+    player2Board.parentElement.classList.toggle('active')
     while (
         !player1.gameboard.areShipsSunk() &&
         !player2.gameboard.areShipsSunk()
